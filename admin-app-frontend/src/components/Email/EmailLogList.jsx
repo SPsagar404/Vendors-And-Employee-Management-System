@@ -47,7 +47,7 @@ const EmailLogList = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Sr No</th>
             <th>Vendor Name</th>
             <th>Vendor Email</th>
             <th>Message</th>
@@ -55,11 +55,11 @@ const EmailLogList = () => {
           </tr>
         </thead>
         <tbody>
-          {emailLogs.map((log) => (
+          {emailLogs.map((log,index) => (
             <tr key={log.id}>
-              <td>{log.id}</td>
-              <td>{log.name}</td>
-              <td>{log.email}</td>
+              <td>{index+1}</td>
+              <td>{log.vendor.name}</td>
+              <td>{log.vendor.email}</td>
               <td>{log.content}</td>
               <td>{new Date(log.sentAt).toLocaleString()}</td>
             </tr>
