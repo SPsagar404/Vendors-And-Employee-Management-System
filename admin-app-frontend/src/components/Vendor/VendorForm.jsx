@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { createVendor } from '../services/apiService';
+import { createVendor } from '../../services/apiService';
 
 const VendorForm = ({ show, setShowVendorModal,loadVendors }) => {
   const [name, setName] = useState('');
@@ -22,13 +22,19 @@ const VendorForm = ({ show, setShowVendorModal,loadVendors }) => {
       setMessage('Vendor added successfully');
       setName('');
       setEmail('');
-      setUpi('Vendor added successfully');
-      alert("Vendor added successfully");
-      handleVendorModalClose();
+      setUpi('');
+      const timer = setTimeout(() => {
+        handleVendorModalClose();
+      }, 1000); 
+      
       loadVendors()
     } catch (error) {
         setIsError(true);
-      setMessage('Error adding vendor');
+        if(error.response.status === 400){
+          setMessage("Vendor email already registered,please try with another one");
+        }else{
+          setMessage('Error adding vendor');
+        }
     }
   };
 

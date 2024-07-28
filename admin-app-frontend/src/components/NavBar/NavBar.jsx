@@ -10,8 +10,8 @@ const NavBar = () => {
         console.log("shdjhsbdhasbd");
           localStorage.removeItem("token");
             localStorage.clear();
-            alert("Logged out successfully!");
             navigate("/login");
+            alert("Logged out successfully!");
       }
     
   return (

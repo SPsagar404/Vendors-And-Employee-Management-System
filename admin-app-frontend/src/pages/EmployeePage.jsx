@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import EmployeeList from '../components/EmployeeList';
+import EmployeeList from '../components/Employee/EmployeeList';
 import { fetchEmployees } from '../services/apiService';
-import EmployeeForm from '../components/EmployeeForm';
+import EmployeeForm from '../components/Employee/EmployeeForm';
 
 const EmployeePage = () => {
   const [employees, setEmployees] = useState([]);

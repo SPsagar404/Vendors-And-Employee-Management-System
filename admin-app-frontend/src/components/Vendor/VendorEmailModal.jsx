@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Table, Button, Form } from 'react-bootstrap';
-import { fetchVendors } from '../services/apiService';
+import { fetchVendors, sendEmailsToVendors } from '../../services/apiService';
+import Loader from '../Loader/Loader';
 
-const VendorEmailModal = ({ show, handleClose }) => {
+const VendorEmailModal = ({ show, setShowVendorEmailModal,getEmailLogs }) => {
   const [vendors, setVendors] = useState([]);
   const [selectedVendors, setSelectedVendors] = useState([]);
   const [allSelected, setAllSelected] = useState(false);
-
-
+  const [loading,SetLoading] = useState(false);
+  
+  const handleClose = () => {
+    setShowVendorEmailModal(false);
+    setAllSelected([]);
+    setSelectedVendors([]);
+  
+  }
 
   useEffect(() => {
     const getVendors = async () => {
@@ -42,16 +49,25 @@ const VendorEmailModal = ({ show, handleClose }) => {
     
     console.log(selectedVendors);
     try {
-      //await sendEmailsToVendors(selectedVendors);
-      alert('Emails sent successfully');
-      handleClose();
-      getEmailLogs();
+      sendEmailsToVendors(selectedVendors).then(()=>{
+        alert("Emails sent successfully!");
+        SetLoading(false);
+        getEmailLogs();
+        handleClose();
+
+      });
+      SetLoading(true);
+      alert('Emails sending in process,please wait few seconds and redirected to emaillogs page!');
+            
     } catch (error) {
       alert('Error sending emails');
     }
   };
 
   return (
+    <div>
+      <Loader/>
+    { !loader && 
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
         <Modal.Title>Vendor List</Modal.Title>
@@ -97,6 +113,8 @@ const VendorEmailModal = ({ show, handleClose }) => {
         </Button>
       </Modal.Footer>
     </Modal>
+    }
+    </div>
   );
 };
 

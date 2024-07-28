@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import { createEmployee } from '../services/apiService';
-import { useNavigate } from 'react-router-dom';
+import { createEmployee } from '../../services/apiService';
 
 const EmployeeForm = ({ show,loadEmployees,setShowEmployeeModal }) => {
   const [name, setName] = useState('');
@@ -11,12 +10,14 @@ const EmployeeForm = ({ show,loadEmployees,setShowEmployeeModal }) => {
   const [message, setMessage] = useState('');
   const [isError,setIsError] = useState(false);
 
-  const navigate = useNavigate();
-
   const handleClose = () => {
-    setShowEmployeeModal(false);
-    setMessage('');
-    setIsError(false);
+      setShowEmployeeModal(false);
+      setMessage('');
+      setName('');
+      setDesignation('');
+      setCtc('');
+      setEmail('');
+      setIsError(false);
   }
 
   const handleSubmit = async (e) => {
@@ -28,14 +29,19 @@ const EmployeeForm = ({ show,loadEmployees,setShowEmployeeModal }) => {
       setDesignation('');
       setCtc('');
       setEmail('');
-      handleClose();
-      navigate("/employees");
-      console.log("navigated")
+      //alert("Employee added successfully")
+      const timer = setTimeout(() => {
+        handleClose();
+      }, 1000);   
       loadEmployees();
     } catch (error) {
         setIsError(true);
-        console.log(error)
-      setMessage(error.response.data.error);
+        if(error.response.status === 400){
+          setMessage("Employee email already registered,please try with another one");
+        }else{
+          setMessage("Error adding employee");
+        }
+      
     }
   };
 

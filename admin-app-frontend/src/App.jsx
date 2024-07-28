@@ -3,12 +3,12 @@ import { Route, Routes, useNavigate} from 'react-router-dom';
 
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import NavBar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import EmployeePage from './pages/EmployeePage';
 import VendorPage from './pages/VendorPage';
 import LoginPage from './pages/LoginPage';
-import EmailLogList from './components/EmailLogList';
+import EmailLogList from './components/Email/EmailLogList';
+import NavBar from './components/NavBar/NavBar';
 
 function App() {
 
@@ -25,7 +25,7 @@ function App() {
   return (
     <div>
       <NavBar handleLogout={handleLogout}/>
-      <div className="container w-75 mt-3">
+      <div className="container  mt-3">
         <Routes>
           <Route path="/" exact element={<HomePage/>} />
           <Route path="/employees" element={<EmployeePage/>} />

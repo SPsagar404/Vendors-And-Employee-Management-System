@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import VendorList from '../components/VendorList';
+import VendorList from '../components/Vendor/VendorList';
 import { fetchVendors, sendEmailsToVendors } from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
-import VendorForm from '../components/VendorForm';
+import VendorForm from '../components/Vendor/VendorForm';
 
 const VendorPage = () => {
   const [vendors, setVendors] = useState([]);

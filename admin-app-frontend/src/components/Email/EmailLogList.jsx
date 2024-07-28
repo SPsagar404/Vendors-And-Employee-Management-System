@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
-import { fetchEmailLogs } from '../services/apiService';
+import { fetchEmailLogs } from '../../services/apiService';
 import { useNavigate } from 'react-router-dom';
-import VendorEmailModal from './VendorEmailModal';
+import VendorEmailModal from '../Vendor/VendorEmailModal';
 
 const EmailLogList = () => {
   const [emailLogs, setEmailLogs] = useState([]);
   const navigate = useNavigate();
   const [showVendorEmailModal, setShowVendorEmailModal] = useState(false);
 
-  const handleVendorEmailModalClose = () => setShowVendorEmailModal(false);
+  
 
   const handleVendorEmailModalShow = () => setShowVendorEmailModal(true);
 
@@ -35,7 +35,7 @@ const EmailLogList = () => {
 
   return (
     <div>
-       <VendorEmailModal show={showVendorEmailModal} handleClose={handleVendorEmailModalClose} getEmailLogs={getEmailLogs}/>
+       <VendorEmailModal show={showVendorEmailModal} setShowVendorEmailModal={setShowVendorEmailModal} getEmailLogs={getEmailLogs}/>
    
       <div className='d-flex justify-content-between mb-3'>
             <h2>Email Logs</h2>
